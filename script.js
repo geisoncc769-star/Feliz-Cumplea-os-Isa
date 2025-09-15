@@ -1,24 +1,38 @@
-cconst messages = [
-  "🎉 Feliz cumpleaños mi Isa 💖",
-  "Aunque estemos lejos, mi corazón late por ti 💕",
-  "Tus ojos son mi luz, tu sonrisa mi alegría ✨",
-  "Eres lo más hermoso que tengo en la vida 💞",
-  "Cada día te amo más, Isa 🌹",
-  "Eres mi todo, mi razón de sonreír 💝"
+const messages = [
+  "Hoy celebro tu vida, mi Isa hermosa 🎉💖",
+  "Aunque la distancia nos separe, mi corazón está contigo 🌍💕",
+  "Tus ojos son estrellas que iluminan mi universo ✨👀",
+  "Tu sonrisa es mi sol, mi razón de vivir ☀💞",
+  "Eres lo más especial que tengo, mi todo 💝",
+  "Feliz cumpleaños, amor de mi vida 🎂❤"
 ];
 
 let index = 0;
 const heart = document.getElementById("heart");
 const messageDiv = document.getElementById("message");
 
-// Cargar música
-const audio = new Audio("song.mp3");
+// Música
+const audio = new Audio("cancion.mp3");
 audio.loop = true;
+
+function typeMessage(text, callback) {
+  let i = 0;
+  messageDiv.textContent = "";
+  const interval = setInterval(() => {
+    messageDiv.textContent += text[i];
+    i++;
+    if (i === text.length) {
+      clearInterval(interval);
+      if (callback) setTimeout(callback, 1500);
+    }
+  }, 80);
+}
 
 heart.addEventListener("click", () => {
   if (audio.paused) {
     audio.play();
   }
-  messageDiv.textContent = messages[index];
-  index = (index + 1) % messages.length;
+  typeMessage(messages[index], () => {
+    index = (index + 1) % messages.length;
+  });
 });
