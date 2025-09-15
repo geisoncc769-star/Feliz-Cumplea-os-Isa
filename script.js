@@ -1,40 +1,24 @@
-const heart = document.querySelector('.heart');
-const audio = document.getElementById('audio');
-
-// Mensajes románticos
-const messages = [
-  "Eres mi razón de sonreír 💖",
-  "Tus ojos iluminan mi mundo ✨",
-  "Aunque estemos lejos, mi corazón está contigo 💌",
-  "Te amo más de lo que las palabras pueden decir 🌹",
-  "Cada día contigo es un regalo 🎁",
-  "Feliz cumpleaños, mi Isa 🎂❤️",
-  "Eres lo mejor que me pasó en la vida 💕",
-  "La distancia no puede apagar lo que siento por ti 🌎❤️"
+cconst messages = [
+  "🎉 Feliz cumpleaños mi Isa 💖",
+  "Aunque estemos lejos, mi corazón late por ti 💕",
+  "Tus ojos son mi luz, tu sonrisa mi alegría ✨",
+  "Eres lo más hermoso que tengo en la vida 💞",
+  "Cada día te amo más, Isa 🌹",
+  "Eres mi todo, mi razón de sonreír 💝"
 ];
 
-// Para mostrar mensajes flotando
-function showMessage() {
-  const msg = document.createElement('div');
-  msg.className = 'floating-message';
-  msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+let index = 0;
+const heart = document.getElementById("heart");
+const messageDiv = document.getElementById("message");
 
-  document.body.appendChild(msg);
+// Cargar música
+const audio = new Audio("song.mp3");
+audio.loop = true;
 
-  msg.style.left = Math.random() * 80 + 10 + "%"; // posición horizontal aleatoria
-  msg.style.bottom = "20px";
-
-  setTimeout(() => {
-    msg.remove();
-  }, 4000);
-}
-
-// Evento al tocar el corazón
-let started = false;
-heart.addEventListener('click', () => {
-  if (!started) {
-    audio.play(); // arranca la música solo con el primer toque
-    started = true;
+heart.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
   }
-  showMessage();
+  messageDiv.textContent = messages[index];
+  index = (index + 1) % messages.length;
 });
